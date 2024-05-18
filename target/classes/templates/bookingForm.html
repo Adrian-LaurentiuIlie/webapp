@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Booking Form</title>
+</head>
+<body>
+	<header>
+		<a href="http://localhost:8080/">Home</a>
+		<a href="http://localhost:8080/feedback/view">Feedback</a>
+	</header>
+    <h1>Booking Form</h1>
+    <form action="#" th:action="@{/booking/create}" th:object="${booking}" method="post">
+        Name: <input type="text" th:field="*{name}" placeholder="Name" />
+        Email: <input type="email" th:field="*{email}" placeholder="Email" />
+        CheckInDate: <input type="date" th:field="*{checkInDate}" placeholder="CheckInDate" />
+        CheckOutDate: <input type="date" th:field="*{checkOutDate}" placeholder="CheckOutDate" /> 
+        <button type="submit">Book Now</button>
+    </form>
+    <a href="http://localhost:8080/booking/view">Booking</a>
+</body>
+</html>

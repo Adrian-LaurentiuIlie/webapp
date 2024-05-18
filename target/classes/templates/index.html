@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">	
+	<head>
+    	<meta charset="UTF-8">
+		<title>Web App</title>
+		<script>
+	        function getLocation() {
+	            if (navigator.geolocation) {
+	                navigator.geolocation.getCurrentPosition(showPosition);
+	            } else {
+	                alert("Geolocation is not supported by this browser.");
+	            }
+	        }
+	
+	        function showPosition(position) {
+	            document.getElementById("latitude").value = position.coords.latitude;
+	            document.getElementById("longitude").value = position.coords.longitude;
+	        }
+    	</script>
+	</head>
+	<body onload="getLocation()">
+		<header>
+			<a href="http://localhost:8080/">Home</a>
+			<a href="http://localhost:8080/booking/view">Booking</a>
+			<a href="http://localhost:8080/feedback/view">Feedback</a>
+		</header>
+		<section>
+			<h2>Web Application For Hotel Reservation Management</h2>
+			<h3>Pleas enter the radius in which you want to find a hotel<h3>
+		</section>
+		<section>
+ 			<form id="distanceForm" th:action="@{/selectHotelsByDistance}" method="post">
+				<input type="hidden" id="latitude" name="latitude">
+        		<input type="hidden" id="longitude" name="longitude">
+				<label for="distance">Distance (km):</label>
+		        <input type="number" step="any" name="distance" required />
+		        <button type="submit">Filter</button>
+			</form>
+			<table>
+				<tbody>
+					<tr th:each="hotel : ${index}">
+						<td>
+							<span th:text="${hotel.name}">Hotel Name</span>
+				    		<form th:action="@{/availableRooms}" method="get">
+		                		<input type="hidden" name="id" th:value="${hotel.id}"/>
+		                		<button type="submit">Show Available Rooms</button>
+		           			</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</body>
+<html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Feedback</title>
+</head>
+<body>
+	<header>
+		<a href="http://localhost:8080/">Home</a>
+		<a href="http://localhost:8080/booking/view">Booking</a>
+		</header>
+    <h1>Feedback</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="feedback : ${feedbackList}">
+                <td th:text="${feedback.id}"></td>
+                <td th:text="${feedback.name}"></td>
+                <td th:text="${feedback.email}"></td>
+                <td th:text="${feedback.message}"></td>
+                <td th:text="${feedback.timestamp}"></td>
+                <td>
+                	<form th:action="@{/feedback/delete}" method="get">
+                		<input type="hidden" name="id" th:value="${feedback.id}"/>
+                		<button type="submit">Delete</button>
+           			</form>
+		        </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="http://localhost:8080/feedback">New Feedback</a>
+</body>
+</html>

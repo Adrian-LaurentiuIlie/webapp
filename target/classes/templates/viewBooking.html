@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Feedback</title>
+</head>
+<body>
+	<header>
+		<a href="http://localhost:8080/">Home</a>
+		<a href="http://localhost:8080/booking/view">Booking</a>
+		<a href="http://localhost:8080/feedback/view">Feedback</a>
+	</header>
+    <h1>Booking</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>checkInDate</th>
+                <th>checkOutDate</th>
+                <th>Timestamp</th>
+                <th>Rooms</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="booking : ${bookingList}">
+                <td th:text="${booking.id}"></td>
+                <td th:text="${booking.name}"></td>
+                <td th:text="${booking.email}"></td>
+                <td th:text="${booking.checkInDate}"></td>
+                <td th:text="${booking.checkOutDate}"></td>
+                <td th:text="${booking.timestamp}"></td>
+                <td th:text="${booking.rooms}"></td>
+                <td>
+                	<form th:action="@{/booking/delete}" method="get">
+	                	<input type="hidden" name="id" th:value="${booking.id}"/>
+	                	<button type="submit">Delete</button>
+           			</form> 
+           	 	</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
