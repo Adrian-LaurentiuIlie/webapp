@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Feedback Form</title>
+</head>
+<body>
+	<header>
+		<a href="http://localhost:8080/">Home</a>
+		<a href="http://localhost:8080/feedback/view">Feedback</a>
+	</header>
+    <h1>Feedback Form</h1>
+    <form action="#" th:action="@{/feedback}" th:object="${feedback}" method="post">
+        Name: <input type="text" th:field="*{name}" /><br/>
+        Email: <input type="email" th:field="*{email}" /><br/>
+        Message: <textarea th:field="*{message}"></textarea><br/>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
